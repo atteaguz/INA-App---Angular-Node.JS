@@ -38,7 +38,6 @@ Sistema de gestión desarrollado como parte de las clases prácticas en el INA -
 - Angular CLI
 
 ### Backend
-```bash
-cd API
-npm install
-npm run dev
+- cd API
+- npm install
+- npm run dev
