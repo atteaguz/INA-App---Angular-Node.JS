@@ -1,0 +1,82 @@
+<!-- src/app/pages/usuarios/lista-usuario/lista-usuario.html -->
+<div class="table-container">
+  <div class="table-header">
+    <button mat-raised-button color="primary" (click)="crearModificarUsuario(null, false)">
+      <mat-icon>add</mat-icon>
+      Crear Usuario
+    </button>
+
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Filtrar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ej: admin@mail.com" #input>
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Columna ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-container>
+
+      <!-- Columna Usuario (email) -->
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Correo Electrónico </th>
+        <td mat-cell *matCellDef="let row"> {{row.username}} </td>
+      </ng-container>
+
+      <!-- Columna Rol -->
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-chip [color]="row.role === 'admin' ? 'accent' : 'primary'" highlighted>
+            {{row.role}}
+          </mat-chip>
+        </td>
+      </ng-container>
+
+      <!-- Columna Estado -->
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-chip [color]="row.estado ? 'primary' : 'warn'" highlighted>
+            {{row.estado ? 'Activo' : 'Inactivo'}}
+          </mat-chip>
+        </td>
+      </ng-container>
+
+      <!-- Columna Acciones -->
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button color="primary" (click)="crearModificarUsuario(row, true)" matTooltip="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="eliminarUsuario(row)" matTooltip="Eliminar">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button color="accent" (click)="crearModificarUsuario(row, false)" matTooltip="Detalles">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Fila cuando no hay datos -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+          No hay datos que coincidan con el filtro "{{input.value}}"
+        </td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons
+                   aria-label="Seleccionar página de usuarios">
+    </mat-paginator>
+  </div>
+</div>

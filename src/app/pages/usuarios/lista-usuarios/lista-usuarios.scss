@@ -1,0 +1,49 @@
+// src/app/pages/usuarios/lista-usuario/lista-usuario.scss
+.table-container {
+  padding: 20px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.filter-field {
+  width: 300px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-column-acciones {
+  width: 120px;
+  text-align: center;
+}
+
+.mat-column-estado {
+  width: 100px;
+}
+
+.mat-column-role {
+  width: 100px;
+}
+
+.mat-column-id {
+  width: 80px;
+}
+
+@media (max-width: 768px) {
+  .table-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-field {
+    width: 100%;
+  }
+}
